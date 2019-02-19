@@ -1,2 +1,2 @@
-# pm2.5_server
-A server for arduino sensor to connect
+# PM2.5 Prediction Server
+This is a program that receives data sent by the sensors and saves into the database (mongoDB).
