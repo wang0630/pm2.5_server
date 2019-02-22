@@ -12,7 +12,11 @@ services:
     container_name: mongo
     image: mongo
     volumes: 
-      # mapped a local folder inside host filesystem to the /data/db, where the mongodb put data
-      - "./mydata:/data/db"
+      # mapped a named volume inside host filesystem to the /data/db, where the mongodb put data
+      - "my-db:/data/db"
     ports: 
       - '27017:27017'
+volumes:
+  my-db:
+    external:
+      name: my-db
