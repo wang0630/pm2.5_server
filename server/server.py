@@ -1,7 +1,10 @@
 import socket
 import threading
 import json
-from db import connectToDB
+import datetime
+import pytz
+import pymodm
+from db import connect_to_db, BaseDB
 from models.data_model import PMData
 # Request handler
 def handler(sock):
@@ -14,10 +17,13 @@ def handler(sock):
         if not msg:
             print("ERROR : No data")
         else:
-            # json format must be double quoted instead of being single quoted
-            data = json.loads(msg.decode('utf-8').replace("\'", "\""))
-            # unpacking the tuple
-            PMData(*tuple(data.values())).save()
+            try:
+                # json format must be double quoted instead of being single quoted
+                data = json.loads(msg.decode('utf-8').replace("\'", "\""))
+                # unpacking the tuple
+                PMData(*tuple(data.values()), datetime.datetime.now()).save()
+            except pymodm.errors.ValidationError as err:
+                print(err)
 
     msg = 'Closing connection...'
     sock.send(msg.encode('utf-8'))
@@ -25,19 +31,20 @@ def handler(sock):
 
 def main():
     # Turn on server
-    mainSock = socket.socket()
-    mainSock.bind(('0.0.0.0', 8080))# port
-    mainSock.listen(5)
+    main_sock = socket.socket()
+    main_sock.bind(('0.0.0.0', 8080))# port
+    main_sock.listen(5)
     # Connect to mongodb
-    connectToDB()
+    connect_to_db()
     # testing for insertion
 
     print('Waiting for connection...')
     while True:
-        (soAccept, addr) = mainSock.accept()
+        (socket_accept, addr) = main_sock.accept()
         # Create a new thread to handle requests
-        thread = threading.Thread(target=handler, args=(soAccept, addr))
+        thread = threading.Thread(target=handler, args=(socket_accept, addr))
         thread.start()
 
 if __name__ == '__main__':
     main()
+    
