@@ -9,3 +9,6 @@ This is a program that receives data sent by the sensors and saves into the data
 
 # run pylint
 navigate to project directory and input pylint **/*.py
+
+# check logs
+docker-compose logs
