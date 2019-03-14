@@ -12,4 +12,5 @@ class PMData(MongoModel):
     class Meta():
         connection_alias = BaseDB.connectionAlias
     def clean(self):
-       print("clean is performed")
+        # print("clean is performed")
+        pass
