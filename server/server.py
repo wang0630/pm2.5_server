@@ -1,7 +1,6 @@
 import socket
 import threading
 import json
-import time
 import datetime
 import pytz
 import pymodm
@@ -28,6 +27,7 @@ def handler(sock, addr):
                     # unpacking the tuple
                     PMData(pm10=data.get('pm10'), pm25=data.get('pm25'), pm100=data.get('pm100'), temp=data.get('temp'),
                         humidity=data.get('humidity'), position=data.get('position'), date=datetime.datetime.now()).save()
+                    break # shut down after a successful connection
                 except pymodm.errors.ValidationError as err:
                     print(err)
                 except ValueError as err:
@@ -35,10 +35,10 @@ def handler(sock, addr):
         except socket.timeout as err:
             print(f"Which bitch data {data}")
             print(f"{data.get('position', addr)} disconnects")
-            sock.close()
             break
         except NameError as err:
             print(err)
+    sock.close()
 
 def main():
     # Turn on server
