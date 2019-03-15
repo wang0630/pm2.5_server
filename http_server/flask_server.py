@@ -8,7 +8,10 @@ app = Flask(__name__)
 app.config['MONGO_DBNAME'] = 'pmBase'
 app.config['MONGO_URI'] = 'mongodb://mongo:27017/pmBase'
 
-#mongo = PyMongo(app)
+mongo = PyMongo(app)
+if mongo:
+	print('Connected')
+
 
 @app.route('/', methods=['GET', 'POST'])
 def get_recent_data(position):

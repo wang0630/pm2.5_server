@@ -3,7 +3,7 @@ services:
   server:
     container_name: pm2.5_server
     restart: always
-    build: .
+    build: server
     ports:
       - '82:8080'
     links:
@@ -16,9 +16,9 @@ services:
   http_server:
     container_name: http_server
     restart: always
-    build: .
+    build: http_server
     ports:
-      - '5000:5000'
+      - '6800:5000'
     links:
       - mongo
     logging:

@@ -1,3 +1,2 @@
-pymodm
 pymongo
 flask_pymongo
