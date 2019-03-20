@@ -17,4 +17,4 @@ EXPOSE 8080
 # ENV NAME World
 
 # Run app when the container launches
-CMD ["python3", "-u", "-m", "server.server"]
+CMD ["python3", "-u", "-m", "server"]
