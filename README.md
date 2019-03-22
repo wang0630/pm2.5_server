@@ -1,7 +1,7 @@
 # PM2.5 Prediction Server
 This repository includes all the programs to be run on Synology NAS, along with docker setting files. This includes : 
 * server - This is the server that receives data sent by the sensors and saves into the database (mongoDB).
-* http_server - This is the server that handles http request from the mobile app, retrieves the requested data from mongoDB and sends back to the users
+* http_server - This is the server that handles http request from the mobile app, retrieves the requested data from mongoDB and sends back to the users.
 
 ## Requirements
 Docker
