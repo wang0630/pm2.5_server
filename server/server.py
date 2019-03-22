@@ -9,7 +9,7 @@ from models.data_model import PMData
 # Request handler
 def handler(sock, addr):
     msg = 'YEE from server. YEEEEEEEEEE'
-    print(sock.gettimeout())
+    # print(sock.gettimeout())
     sock.send(msg.encode('utf-8'))
     data = {}
     while True:
